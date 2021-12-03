@@ -1,7 +1,7 @@
 import random
 import string
 from PIL import Image, ImageDraw
-
+#25.1
 def passgen(n, nums):
     numeric = ([random.randint(-10, 10) for i in range(n)])
     numeric = str(numeric)
@@ -41,7 +41,7 @@ if __name__ == '__main__':
         n = 12
         nums = 3
         passgen(n, nums)
-#
+#25.3
 import random
 from itertools import count
 import numpy as np
@@ -122,7 +122,7 @@ class Monte_Karlo():
                 break
             print('iter: {}'.format(iter))
             self.calc_with_np(start * mul ** iter)
-#
+#26.1
 
 def gradient(color):
     color = color.upper()
@@ -153,7 +153,7 @@ def gradient(color):
                 pixels[i, j] = r, g, b
 
     im.save('res.png')
-#
+#26.2
 def board(num, s):
     ni = Image.new("RGB", (num * s, num * s), (256, 256, 256))
     draw = ImageDraw.Draw(ni)
@@ -164,7 +164,7 @@ def board(num, s):
                 draw.rectangle([j * s, i * s, j * s + s - 1, i * s + s - 1], b)
     ni.save('res.png', 'PNG')
 
-#
+#26.3
 def makeanagliph(filename, delta):
     im = Image.open(filename)
     x, y = im.size
@@ -181,7 +181,7 @@ def makeanagliph(filename, delta):
                 g, b = pixels[i, j][1:]
                 r = pixels[i - delta, j][0]
     res.save("res.jpg")
-#
+#26.4
 im = Image.open("lena.pgm")
 
 draw = ImageDraw.Draw(im)
