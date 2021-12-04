@@ -41,6 +41,36 @@ if __name__ == '__main__':
         n = 12
         nums = 3
         passgen(n, nums)
+#25.2
+import random
+
+st1 = ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'p', 'a', 's', 'd', 'f', 'g', 
+       'h', 'j', 'k', 'z', 'x', 'c', 'v', 'b', 'n', 'm']
+st2 = ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'P', 'A', 'S', 'D', 'F', 'G', 'H', 
+       'J', 'K', 'L', 'Z', 'X', 'C', 'V', 'B', 'N', 'M']
+st3 = ['2', '3', '4', '5', '6', '7', '8', '9']
+st4 = st1 + st2 + st3
+ 
+ 
+def generate_password(m):
+    pas = []
+    pas.append(random.choice(st1))
+    pas.append(random.choice(st2))
+    pas.append(random.choice(st3))
+    for i in range(0, m - 3):
+        pas.append(random.choice(st4))
+    random.shuffle(pas)
+    return ''.join(pas)
+ 
+ 
+def main(n, m):
+    list_passw = set()
+    while len(list_passw) < n:
+        list_passw.add(generate_password(m))
+    return list_passw
+print("Случайный пароль из 7 символов:", generate_password(7))  
+print("10 случайных паролей длиной 15 символов:")  
+print(*main(10, 15), sep="\n")
 #25.3
 import random
 from itertools import count
@@ -122,6 +152,51 @@ class Monte_Karlo():
                 break
             print('iter: {}'.format(iter))
             self.calc_with_np(start * mul ** iter)
+ #25.4
+import random, string
+ 
+ 
+def generate_password(m):
+  x = random.randint(1, m-2)
+  y = random.randint(1, m - x - 1)
+  z = m - x - y
+  
+  l = []
+  
+  i = 0
+  while i < x:
+    n = random.choice(string.digits)
+    if n != '1' and n != '0':
+      l.append(n)
+      i += 1
+  
+  i = 0
+  while i < y:
+    u = random.choice(string.ascii_uppercase)
+    if u != 'I' and u != 'O':
+      l.append(u)
+      i += 1
+  
+  i = 0
+  while i < z:
+    w = random.choice(string.ascii_lowercase)
+    if w != 'l' and w != 'o':
+      l.append(w)
+      i += 1
+      
+  random.shuffle(l)
+  return ''.join(l)
+ 
+def main(n, m):
+  list_of_passwords = []
+  for i in range(n):
+    list_of_passwords.append(generate_password(m))
+  return list_of_passwords
+  
+print("Случайный пароль из 7 символов:" , generate_password(7))
+print("10 случайных паролей длиной 15 символов:")
+print(*main(10, 15), sep="\n")
+            
 #26.1
 
 def gradient(color):
@@ -181,7 +256,7 @@ def makeanagliph(filename, delta):
                 g, b = pixels[i, j][1:]
                 r = pixels[i - delta, j][0]
     res.save("res.jpg")
-#26.4
+#27.1
 im = Image.open("lena.pgm")
 
 draw = ImageDraw.Draw(im)
@@ -191,3 +266,19 @@ del draw
 
 # write to stdout
 im.save(sys.stdout, "PNG")
+#27.2
+def negative(source, res):
+ 
+    source = Image.open(source)
+ 
+    result = Image.new('RGB', source.size)
+ 
+    for x in range(source.size[0]):
+ 
+        for y in range(source.size[1]):
+ 
+            r, g, b = source.getpixel((x, y))
+ 
+            result.putpixel((x, y), (255 - r, 255 - g, 255 - b))
+ 
+    result.save(res, "JPEG")
